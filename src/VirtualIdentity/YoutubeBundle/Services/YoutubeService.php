@@ -181,11 +181,11 @@ class YoutubeService
             $this->authentication['bearer'] = $accessToken;
         }
 
-//        try {
+        try {
             $this->refreshAccessToken();
-//        } catch (ApiException $e) {
+        } catch (ApiException $e) {
             // nothing. this only happens if the configuration was not set correctly
-//        }
+        }
         $this->initializeApi();
     }
 
@@ -243,7 +243,7 @@ class YoutubeService
             $this->qb->setMaxResults($limit);
         }
         if ($onlyApproved) {
-            $this->qb->andWhere(array('approved' => true));
+            $this->qb->andWhere('e.approved = true');
         }
         return $this->qb->getQuery()->getResult();
     }
